@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jon Orlanz Naluz | Portfolio</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/CircularPortfolioLogo.svg" type="image/svg+xml">
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="/_sdk/element_sdk.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,14 +14,6 @@
     * { box-sizing: border-box; }
     
     :root {
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #13131a;
-      --text-primary: #f0f0f5;
-      --accent-primary: #6366f1;
-      --accent-secondary: #22d3ee;
-    }
-    
-    .light-mode {
       --bg-primary: #f8fafc;
       --bg-secondary: #ffffff;
       --text-primary: #1e293b;
@@ -28,11 +21,43 @@
       --accent-secondary: #0891b2;
     }
     
+    .dark-mode {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #13131a;
+      --text-primary: #f0f0f5;
+      --accent-primary: #6366f1;
+      --accent-secondary: #22d3ee;
+    }
+    
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       width: 100%;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-primary) transparent;
+    }
+
+    html::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    html::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    html::-webkit-scrollbar-thumb {
+      background: var(--accent-primary);
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    html::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-secondary);
     }
     
     body {
@@ -58,22 +83,35 @@
     }
     
     .glass-card {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.08);
       border-radius: 20px;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: visible;
     }
     
-    .light-mode .glass-card {
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    .glass-card > * {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .dark-mode .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: none;
     }
     
     .glass-card:hover {
       transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 25px 50px -12px rgba(79, 70, 229, 0.15);
+      border-color: rgba(79, 70, 229, 0.3);
+    }
+    
+    .dark-mode .glass-card:hover {
       box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.25);
       border-color: rgba(99, 102, 241, 0.3);
     }
@@ -103,16 +141,16 @@
       position: relative;
       width: 70px;
       height: 36px;
-      background: linear-gradient(135deg, #1e1e2e 0%, #2d2d3d 100%);
+      background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
       border-radius: 18px;
       cursor: pointer;
       transition: all 0.4s ease;
-      border: 2px solid rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(79, 70, 229, 0.2);
     }
     
-    .light-mode .toggle-switch {
-      background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
-      border-color: rgba(99, 102, 241, 0.2);
+    .dark-mode .toggle-switch {
+      background: linear-gradient(135deg, #1e1e2e 0%, #2d2d3d 100%);
+      border-color: rgba(255, 255, 255, 0.1);
     }
     
     .toggle-knob {
@@ -121,20 +159,20 @@
       left: 3px;
       width: 26px;
       height: 26px;
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
       border-radius: 50%;
       transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 14px;
-      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+      box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
     }
     
-    .light-mode .toggle-knob {
+    .dark-mode .toggle-knob {
       left: 37px;
-      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-      box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
     }
     
     .nav-link {
@@ -165,8 +203,12 @@
     .timeline-item {
       position: relative;
       padding-left: 30px;
-      border-left: 2px solid rgba(99, 102, 241, 0.3);
+      border-left: 2px solid rgba(79, 70, 229, 0.3);
       margin-left: 10px;
+    }
+    
+    .dark-mode .timeline-item {
+      border-left-color: rgba(99, 102, 241, 0.3);
     }
     
     .timeline-dot {
@@ -177,14 +219,22 @@
       height: 14px;
       background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
       border-radius: 50%;
+      box-shadow: 0 0 20px rgba(79, 70, 229, 0.5);
+    }
+    
+    .dark-mode .timeline-dot {
       box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
     }
     
     .skill-bar {
       height: 8px;
-      background: rgba(99, 102, 241, 0.2);
+      background: rgba(79, 70, 229, 0.2);
       border-radius: 4px;
       overflow: hidden;
+    }
+    
+    .dark-mode .skill-bar {
+      background: rgba(99, 102, 241, 0.2);
     }
     
     .skill-progress {
@@ -206,22 +256,28 @@
       cursor: pointer;
       perspective: 1000px;
       margin: 0 auto;
+      border-radius: 20px;
+      overflow: hidden;
     }
 
     .hero-avatar {
       width: 100%;
       height: 100%;
-      border-radius: 50%;
+      border-radius: 20px;
       background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 80px;
-      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.4);
+      box-shadow: 0 20px 60px rgba(79, 70, 229, 0.3);
       animation: pulse-glow 3s infinite;
       position: absolute;
       transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       backface-visibility: hidden;
+    }
+
+    .dark-mode .hero-avatar {
+      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.4);
     }
 
     .hero-avatar.professional-mode {
@@ -261,6 +317,11 @@
     }
     
     @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 20px 60px rgba(79, 70, 229, 0.3); }
+      50% { box-shadow: 0 20px 80px rgba(79, 70, 229, 0.4); }
+    }
+
+    .dark-mode @keyframes pulse-glow {
       0%, 100% { box-shadow: 0 20px 60px rgba(99, 102, 241, 0.4); }
       50% { box-shadow: 0 20px 80px rgba(99, 102, 241, 0.6); }
     }
@@ -268,7 +329,7 @@
     .contact-icon {
       width: 50px;
       height: 50px;
-      border-radius: 12px;
+      border-radius: 50%;
       background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
       display: flex;
       align-items: center;
@@ -282,7 +343,7 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      padding: 8px;
+      padding: 0;
     }
     
     .btn-primary {
@@ -302,6 +363,36 @@
     
     .btn-primary:hover {
       transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(79, 70, 229, 0.3);
+    }
+
+    .dark-mode .btn-primary:hover {
+      box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--accent-primary);
+      color: var(--accent-primary);
+      padding: 10px 30px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-secondary:hover {
+      background: var(--accent-primary);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(79, 70, 229, 0.3);
+    }
+
+    .dark-mode .btn-secondary:hover {
       box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
     }
     
@@ -310,15 +401,15 @@
       align-items: center;
       gap: 6px;
       padding: 6px 14px;
-      background: rgba(99, 102, 241, 0.15);
+      background: rgba(79, 70, 229, 0.1);
       border-radius: 20px;
       font-size: 12px;
       color: var(--accent-primary);
       font-weight: 600;
     }
     
-    .light-mode .cert-badge {
-      background: rgba(99, 102, 241, 0.1);
+    .dark-mode .cert-badge {
+      background: rgba(99, 102, 241, 0.15);
     }
     
     .scroll-indicator {
@@ -397,9 +488,8 @@
     }
 
     .nav-square {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(79, 70, 229, 0.08);
+      border: 1px solid rgba(79, 70, 229, 0.2);
       border-radius: 14px;
       padding: 0.8rem;
       text-align: center;
@@ -413,6 +503,11 @@
       gap: 0.3rem;
       position: relative;
       overflow: hidden;
+    }
+
+    .dark-mode .nav-square {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .nav-square::before {
@@ -441,6 +536,11 @@
 
     .nav-square:hover {
       transform: scale(1.08);
+      box-shadow: 0 10px 30px rgba(79, 70, 229, 0.2);
+      border-color: rgba(79, 70, 229, 0.5);
+    }
+
+    .dark-mode .nav-square:hover {
       box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
       border-color: rgba(99, 102, 241, 0.5);
     }
@@ -498,6 +598,10 @@
 
     .scroll-arrow:hover {
       transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
+    }
+
+    .dark-mode .scroll-arrow:hover {
       box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
     }
 
@@ -595,16 +699,21 @@
     }
 
     .skill-container {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(79, 70, 229, 0.05);
+      border: 1px solid rgba(79, 70, 229, 0.15);
       border-radius: 20px;
       padding: 1.75rem;
       aspect-ratio: 1 / 1;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      overflow: hidden;
+      overflow: visible;
+      position: relative;
+    }
+
+    .dark-mode .skill-container {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .skills-grid {
@@ -642,17 +751,29 @@
       align-items: center;
       gap: 1rem;
       padding: 1.25rem;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(79, 70, 229, 0.08);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(79, 70, 229, 0.15);
       border-radius: 16px;
       transition: all 0.3s ease;
       cursor: pointer;
       text-decoration: none;
+      position: relative;
+      overflow: visible;
+    }
+
+    .dark-mode .contact-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .contact-box:hover {
       transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(79, 70, 229, 0.15);
+      border-color: rgba(79, 70, 229, 0.3);
+    }
+
+    .dark-mode .contact-box:hover {
       box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
       border-color: rgba(99, 102, 241, 0.3);
     }
@@ -660,8 +781,8 @@
     .cert-image-placeholder {
       width: 120px;
       height: 150px;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(34, 211, 238, 0.1));
-      border: 2px dashed rgba(99, 102, 241, 0.3);
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(9, 136, 178, 0.1));
+      border: 2px dashed rgba(79, 70, 229, 0.3);
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -675,6 +796,11 @@
       transition: all 0.3s ease;
     }
 
+    .dark-mode .cert-image-placeholder {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(34, 211, 238, 0.1));
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+
     .cert-image-placeholder img {
       width: 100%;
       height: 100%;
@@ -684,7 +810,7 @@
     .cert-image-inner {
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(34, 211, 238, 0.2));
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.2), rgba(9, 136, 178, 0.2));
       display: flex;
       align-items: center;
       justify-content: center;
@@ -696,6 +822,10 @@
       left: 0;
       clip-path: inset(25% 0 0 0);
       transition: clip-path 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .dark-mode .cert-image-inner {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(34, 211, 238, 0.2));
     }
 
     .cert-image-placeholder:hover .cert-image-inner {
@@ -718,12 +848,16 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(5px);
       z-index: 1000;
       align-items: center;
       justify-content: center;
       padding: 20px;
+    }
+
+    .dark-mode .modal-overlay {
+      background: rgba(0, 0, 0, 0.85);
     }
 
     .modal-overlay.active {
@@ -738,8 +872,12 @@
       width: 100%;
       max-height: 80vh;
       overflow-y: auto;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.08);
       animation: modal-slide-up 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .dark-mode .modal-content {
+      border-color: rgba(255, 255, 255, 0.1);
     }
 
     @keyframes modal-slide-up {
@@ -756,8 +894,8 @@
     .modal-cert-image {
       width: 100%;
       aspect-ratio: 4 / 5;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(34, 211, 238, 0.15));
-      border: 2px dashed rgba(99, 102, 241, 0.3);
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.15), rgba(9, 136, 178, 0.15));
+      border: 2px dashed rgba(79, 70, 229, 0.3);
       border-radius: 16px;
       display: flex;
       align-items: center;
@@ -767,6 +905,11 @@
       opacity: 0.8;
       margin-bottom: 1.5rem;
       overflow: hidden;
+    }
+
+    .dark-mode .modal-cert-image {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(34, 211, 238, 0.15));
+      border-color: rgba(99, 102, 241, 0.3);
     }
 
     .modal-cert-image img {
@@ -783,7 +926,7 @@
     }
 
     .modal-close-btn {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(79, 70, 229, 0.1);
       border: none;
       border-radius: 50%;
       width: 40px;
@@ -798,9 +941,17 @@
       flex-shrink: 0;
     }
 
+    .dark-mode .modal-close-btn {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
     .modal-close-btn:hover {
-      background: rgba(99, 102, 241, 0.2);
+      background: rgba(79, 70, 229, 0.2);
       transform: rotate(90deg);
+    }
+
+    .dark-mode .modal-close-btn:hover {
+      background: rgba(99, 102, 241, 0.2);
     }
 
     .modal-info h3 {
@@ -836,8 +987,8 @@
     .membership-image-placeholder {
       width: 100px;
       height: 140px;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(34, 211, 238, 0.1));
-      border: 2px dashed rgba(99, 102, 241, 0.3);
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(9, 136, 178, 0.1));
+      border: 2px dashed rgba(79, 70, 229, 0.3);
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -851,6 +1002,11 @@
       cursor: pointer;
     }
 
+    .dark-mode .membership-image-placeholder {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(34, 211, 238, 0.1));
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+
     .membership-image-placeholder img {
       width: 100%;
       height: 100%;
@@ -860,7 +1016,7 @@
     .membership-image-inner {
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(34, 211, 238, 0.2));
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.2), rgba(9, 136, 178, 0.2));
       display: flex;
       align-items: center;
       justify-content: center;
@@ -872,6 +1028,10 @@
       left: 0;
       clip-path: inset(25% 0 0 0);
       transition: clip-path 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .dark-mode .membership-image-inner {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(34, 211, 238, 0.2));
     }
 
     .membership-image-placeholder:hover .membership-image-inner {
@@ -908,27 +1068,119 @@
         width: 100%;
       }
     }
+
+    .navbar-logo {
+      height: 40px;
+      width: auto;
+      max-width: 120px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-logo:hover {
+      transform: scale(1.05);
+    }
+
+    .floating-resume-btn {
+      position: fixed;
+      top: 100px;
+      left: 30px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      z-index: 99;
+      padding: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .floating-resume-btn:hover {
+      animation: wiggle 0.5s ease-in-out infinite;
+    }
+
+    .floating-resume-btn:active {
+      transform: scale(0.9);
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg) translateX(0); }
+      25% { transform: rotate(-8deg) translateX(-3px); }
+      50% { transform: rotate(8deg) translateX(3px); }
+      75% { transform: rotate(-8deg) translateX(-3px); }
+    }
+
+    .resume-modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .resume-modal-overlay.active {
+      display: flex;
+    }
+
+    .resume-modal-content {
+      background: var(--bg-secondary);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 400px;
+      width: 100%;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      animation: modal-slide-up 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dark-mode .resume-modal-content {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
   </style>
-  <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
  <body class="h-full">
   <div class="app-wrapper" id="app"><!-- Navigation -->
    <nav class="fixed top-0 left-0 right-0 z-50 glass-card" style="border-radius: 0; border-left: none; border-right: none; border-top: none; padding: 1rem;">
-    <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between"><a href="#hero" class="text-2xl font-bold gradient-text" style="font-family: 'Space Grotesk', sans-serif;">JON</a>
+    <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between"><div class="flex items-center gap-4"><a href="#hero" style="display: flex; align-items: center; text-decoration: none;"> <img src="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/PortfolioLogo.svg" alt="Portfolio Logo" class="navbar-logo" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#4f46e5'; this.alt='Logo';"> </a></div>
      <div class="desktop-nav hidden md:flex items-center gap-6"><a href="#hero" class="nav-link">Home</a> <a href="#education" class="nav-link">Education &amp; About</a> <a href="#projects" class="nav-link">Projects</a> <a href="#skills" class="nav-link">Skills</a> <a href="#certifications" class="nav-link">Certs</a> <a href="#leadership" class="nav-link">Leadership</a> <a href="#contact" class="nav-link">Contact</a>
      </div>
      <div class="flex items-center gap-4">
       <div class="toggle-switch" id="themeToggle" onclick="toggleTheme()">
        <div class="toggle-knob">
-        🌙
+        ☀️
        </div>
       </div>
       <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span> <span></span> <span></span>
       </div>
      </div>
     </div>
-   </nav><!-- Mobile Menu -->
+   </nav><!-- Resume Download Modal -->
+   <div class="resume-modal-overlay" id="resumeModal" onclick="closeResumeModal(event)">
+    <div class="resume-modal-content" onclick="event.stopPropagation()">
+     <div class="modal-header" style="margin-bottom: 1.5rem;">
+      <div class="modal-info">
+       <h3 style="margin: 0; font-size: 1.5rem; font-family: 'Space Grotesk', sans-serif;">Download My Resume</h3>
+      </div><button class="modal-close-btn" onclick="closeResumeModal()" style="margin-top: 0;">✕</button>
+     </div>
+     <p style="opacity: 0.8; margin-bottom: 2rem; text-align: center;">Would you like to download my resume?</p>
+     <div style="display: flex; gap: 1rem; justify-content: center;">
+      <a href="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/JON_ORLANZ_BUCAD_NALUZ_RESUME.pdf" download="JON_ORLANZ_BUCAD_NALUZ_RESUME.pdf" class="btn-primary" style="text-decoration: none;">⬇️ Download</a>
+      <button class="btn-secondary" onclick="closeResumeModal()" style="cursor: pointer;">Cancel</button>
+     </div>
+    </div>
+   </div><!-- Floating Resume Button -->
+   <button class="floating-resume-btn" id="resumeBtn" title="View Resume" onclick="openResumeModal()">📄</button><!-- Mobile Menu -->
    <div class="mobile-menu" id="mobileMenu">
     <div class="flex flex-col gap-4"><a href="#hero" class="nav-link" onclick="closeMobileMenu()">Home</a> <a href="#education" class="nav-link" onclick="closeMobileMenu()">Education &amp; About</a> <a href="#projects" class="nav-link" onclick="closeMobileMenu()">Projects</a> <a href="#skills" class="nav-link" onclick="closeMobileMenu()">Skills</a> <a href="#certifications" class="nav-link" onclick="closeMobileMenu()">Certifications</a> <a href="#leadership" class="nav-link" onclick="closeMobileMenu()">Leadership</a> <a href="#contact" class="nav-link" onclick="closeMobileMenu()">Contact</a>
     </div>
@@ -944,11 +1196,11 @@
      <div class="modal-cert-image" id="modalImage"><img id="modalImg" src="" alt="Certificate" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.alt='Image unavailable';">
      </div>
     </div>
-   </div><!-- Hero Section - Name & Tagline Only -->
-   <section id="hero" class="min-h-screen flex items-center justify-center px-4 pt-20 relative" style="min-height: 100%;">
+   </div><!-- Hero Section -->
+   <section id="hero" class="min-h-screen flex items-center justify-center px-4 pt-20 relative" style="min-height: 100%; margin-top: 60px;">
     <div class="max-w-6xl mx-auto w-full text-center">
      <h1 class="text-6xl md:text-8xl font-bold mb-8" style="font-family: 'Space Grotesk', sans-serif; line-height: 1.1;"><span class="gradient-text">Jon Orlanz Naluz</span></h1>
-     <p class="text-2xl md:text-4xl opacity-80 font-light" id="heroTagline">Agile Enthusiast: Because I enjoy daily standups almost as much as I enjoy coffee. ☕</p><!-- Navigation Grid - 7 items with wave effect -->
+     <p class="text-2xl md:text-4xl opacity-80 font-light" id="heroTagline">Agile Enthusiast: Because I enjoy daily standups almost as much as I enjoy coffee. ☕</p><!-- Navigation Grid -->
      <div class="nav-grid mt-16"><a href="#hero" class="nav-square" onclick="closeMobileMenu()">
        <div class="emoji">
         🏠
@@ -999,10 +1251,10 @@
       </div>
      </div>
     </div>
-   </section><!-- Introduction Section - Picture + Description -->
+   </section><!-- Introduction Section -->
    <section id="introduction" class="py-20 px-4">
     <div class="max-w-6xl mx-auto">
-     <div class="grid md:grid-cols-2 gap-12 items-center"><!-- Picture on Left - Flippable -->
+     <div class="grid md:grid-cols-2 gap-12 items-center"><!-- Picture on Left -->
       <div class="flex justify-center md:justify-start">
        <div class="hero-avatar-container"><img src="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/professionalProfilePhoto.png" alt="Professional Profile" class="hero-avatar professional-mode" style="object-fit: cover;" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#6366f1'; this.alt='Image unavailable';"> <img src="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/instagramProfilePhoto.jpg" alt="Instagram Profile" class="hero-avatar instagram-mode" style="object-fit: cover;" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#ec4899'; this.alt='Image unavailable';">
         <div class="flip-indicator">
@@ -1013,49 +1265,52 @@
       <div class="space-y-6">
        <h2 class="text-4xl md:text-5xl font-bold gradient-text" style="font-family: 'Space Grotesk', sans-serif;">Jon Orlanz Naluz</h2>
        <p class="text-lg md:text-xl leading-relaxed opacity-90" id="heroSummary">Motivated Computer Science student aspiring to become a Software Developer, with a strong foundation in programming and emerging technologies. Recognized as a proactive leader who thrives in collaborative environments, bringing passion for agile teamwork, problem-solving, and designing innovative solutions. I aim to contribute creativity, discipline, and leadership to dynamic development projects.</p>
-       <div class="flex flex-wrap gap-4"><a href="#projects" class="btn-primary">View Projects →</a> <a href="#contact" class="btn-primary" style="background: transparent; border: 2px solid var(--accent-primary);">Contact Me</a>
+       <div class="flex flex-wrap gap-4"><a href="#projects" class="btn-primary">View Projects →</a> <a href="#contact" class="btn-secondary">Contact Me</a>
        </div>
       </div>
      </div>
     </div>
-   </section><!-- Education & About Section Combined -->
+   </section><!-- Education & About Section -->
    <section id="education" class="py-20 px-4">
-    <div class="max-w-6xl mx-auto"><!-- Education Grid (3 columns) -->
+    <div class="max-w-6xl mx-auto"><!-- Education Grid -->
      <div class="mb-12">
       <h2 class="text-3xl font-bold gradient-text mb-6" style="font-family: 'Space Grotesk', sans-serif;">Education</h2>
-      <div class="education-grid"><!-- High School -->
+      <div class="education-grid">
        <div class="glass-card p-6">
         <div class="timeline-item">
          <div class="timeline-dot"></div><span class="cert-badge mb-3">Jul 2016 - Mar 2020</span>
          <h3 class="text-lg font-bold mt-3 gradient-text">High School</h3>
          <p class="text-base opacity-90 mt-2">Megabyte College Foundation Inc.</p>
          <p class="opacity-70 text-sm">Floridablanca, Pampanga</p>
-         <div class="mt-3 flex items-center gap-2"><span class="text-xl">🏆</span> <span class="font-semibold text-yellow-400 text-sm">Valedictorian</span>
+         <div class="mt-3 flex items-center gap-2">
+          <span class="text-xl">🏆</span> <span class="font-semibold text-yellow-400 text-sm">Valedictorian</span>
          </div>
         </div>
-       </div><!-- Senior High School -->
+       </div>
        <div class="glass-card p-6">
         <div class="timeline-item">
          <div class="timeline-dot"></div><span class="cert-badge mb-3">Sep 2020 - Jun 2022</span>
          <h3 class="text-lg font-bold mt-3 gradient-text">Senior High School</h3>
          <p class="text-base opacity-90 mt-2">Our Lady of Fatima University</p>
          <p class="opacity-70 text-sm">Valenzuela Campus • STEM Strand</p>
-         <div class="mt-3 flex items-center gap-2"><span class="text-xl">⭐</span> <span class="font-semibold text-yellow-400 text-sm">With High Honors</span>
+         <div class="mt-3 flex items-center gap-2">
+          <span class="text-xl">🎓</span> <span class="font-semibold text-yellow-400 text-sm">With High Honors</span>
          </div>
         </div>
-       </div><!-- Bachelor's Degree -->
+       </div>
        <div class="glass-card p-6">
         <div class="timeline-item">
          <div class="timeline-dot"></div><span class="cert-badge mb-3">Aug 2022 - Jun 2026</span>
          <h3 class="text-lg font-bold mt-3 gradient-text">Bachelor of Science in CS</h3>
          <p class="text-base opacity-90 mt-2">Our Lady of Fatima University</p>
          <p class="opacity-70 text-sm">Valenzuela Campus</p>
-         <div class="mt-3 flex items-center gap-2"><span class="text-xl">🏆</span> <span class="font-semibold text-yellow-400 text-sm">Dean's Lister</span>
+         <div class="mt-3 flex items-center gap-2">
+          <span class="text-xl">📚</span> <span class="font-semibold text-yellow-400 text-sm">Dean's Lister</span>
          </div>
         </div>
        </div>
       </div>
-     </div><!-- About Me Grid (2 columns) -->
+     </div><!-- About Me Grid -->
      <div>
       <h2 class="text-3xl font-bold gradient-text mb-6" style="font-family: 'Space Grotesk', sans-serif;">About Me</h2>
       <div class="about-grid">
@@ -1126,30 +1381,34 @@
     <div class="max-w-6xl mx-auto">
      <h2 class="section-header gradient-text">Projects</h2>
      <div class="projects-wrapper"><button class="scroll-arrow left" onclick="scrollProjects(-1)">←</button>
-      <div class="project-grid" id="projectGrid"><!-- Project 1 -->
-       <div class="project-card glass-card" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(99, 102, 241, 0.05)); border: 1px solid rgba(99, 102, 241, 0.3);"><span class="cert-badge">Jan 2025 - Dec 2025</span>
-        <h3 class="text-xl font-bold mt-3" style="background: linear-gradient(135deg, #6366f1, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">ProTrack</h3>
+      <div class="project-grid" id="projectGrid">
+       <div class="project-card glass-card" style="background: linear-gradient(135deg, rgba(79, 70, 229, 0.2), rgba(79, 70, 229, 0.05)); border: 1px solid rgba(79, 70, 229, 0.3);"><span class="cert-badge">Jan 2025 - Dec 2025</span>
+        <h3 class="text-xl font-bold mt-3" style="background: linear-gradient(135deg, #4f46e5, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">ProTrack</h3>
         <p class="text-base opacity-90 mt-3 leading-relaxed">An activity tracking system for productivity monitoring of remote employees using Isolation Forest Algorithm.</p>
-        <div class="mt-4"><a href="https://pro-track-one.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-primary text-sm"> View Live Demo → </a>
+        <div class="mt-4">
+         <a href="https://pro-track-one.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-primary text-sm"> View Live Demo → </a>
         </div>
-       </div><!-- Project 2 -->
-       <div class="project-card glass-card" style="background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(34, 211, 238, 0.05)); border: 1px solid rgba(34, 211, 238, 0.3);"><span class="cert-badge" style="background: rgba(34, 211, 238, 0.15); color: #22d3ee;">Sep 2025 - Dec 2025</span>
-        <h3 class="text-xl font-bold mt-3" style="background: linear-gradient(135deg, #22d3ee, #0891b2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Don't Get Caught Munching</h3>
+       </div>
+       <div class="project-card glass-card" style="background: linear-gradient(135deg, rgba(9, 136, 178, 0.2), rgba(9, 136, 178, 0.05)); border: 1px solid rgba(9, 136, 178, 0.3);"><span class="cert-badge" style="background: rgba(9, 136, 178, 0.15); color: #0891b2;">Sep 2025 - Dec 2025</span>
+        <h3 class="text-xl font-bold mt-3" style="background: linear-gradient(135deg, #0891b2, #0284c7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Don't Get Caught Munching</h3>
         <p class="text-base opacity-90 mt-3 leading-relaxed">A mischievous school-time stealth game, players sneak bites of their favorite snacks in class without getting caught by the teacher.</p>
         <p class="text-sm opacity-70 mt-2">A 3D game made in Unity.</p>
-        <div class="mt-4"><a href="https://github.com/9SouL1/Munching-Final" target="_blank" rel="noopener noreferrer" class="btn-primary text-sm"> View on GitHub → </a>
+        <div class="mt-4">
+         <a href="https://github.com/9SouL1/Munching-Final" target="_blank" rel="noopener noreferrer" class="btn-primary text-sm"> View on GitHub → </a>
         </div>
-       </div><!-- Project 3 -->
+       </div>
        <div class="project-card glass-card" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0.05)); border: 1px solid rgba(168, 85, 247, 0.3);"><span class="cert-badge" style="background: rgba(168, 85, 247, 0.15); color: #a855f7;">Sep 2024 - Dec 2024</span>
         <h3 class="text-xl font-bold mt-3" style="background: linear-gradient(135deg, #a855f7, #9333ea); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">ICEE For You</h3>
         <p class="text-base opacity-90 mt-3 leading-relaxed">A smart companionship robot for young children with finite state machine-based behavior, an Android mobile application using Kotlin, and programmed robot components in C++ with Arduino support.</p>
-        <div class="mt-4"><span class="cert-badge" style="background: rgba(168, 85, 247, 0.15); color: #a855f7; font-size: 11px;">Robotics</span>
+        <div class="mt-4">
+         <span class="cert-badge" style="background: rgba(168, 85, 247, 0.15); color: #a855f7; font-size: 11px;">Robotics</span>
         </div>
-       </div><!-- Project 4 -->
+       </div>
        <div class="project-card glass-card" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.05)); border: 1px solid rgba(59, 130, 246, 0.3);"><span class="cert-badge" style="background: rgba(59, 130, 246, 0.15); color: #3b82f6;">Sep 2024 - Dec 2024</span>
         <h3 class="text-xl font-bold mt-3" style="background: linear-gradient(135deg, #3b82f6, #2563eb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">ThermoFlow</h3>
         <p class="text-base opacity-90 mt-3 leading-relaxed">A temperature converter application built with Android Studio SDK, using Kotlin for the Android interface and JavaScript for additional functionality.</p>
-        <div class="mt-4"><a href="https://github.com/orlanzzz/Thermo-Flow" target="_blank" rel="noopener noreferrer" class="btn-primary text-sm"> View on GitHub → </a>
+        <div class="mt-4">
+         <a href="https://github.com/orlanzzz/Thermo-Flow" target="_blank" rel="noopener noreferrer" class="btn-primary text-sm"> View on GitHub → </a>
         </div>
        </div>
       </div><button class="scroll-arrow right" onclick="scrollProjects(1)">→</button>
@@ -1159,22 +1418,22 @@
    <section id="skills" class="py-20 px-4">
     <div class="max-w-6xl mx-auto">
      <h2 class="section-header gradient-text">Skills</h2>
-     <div class="skills-grid"><!-- Programming Languages -->
+     <div class="skills-grid">
       <div class="skill-container">
        <h3 class="text-lg font-bold gradient-text mb-4">Programming Languages</h3>
        <div class="flex flex-wrap gap-2"><span class="cert-badge text-xs">Python</span> <span class="cert-badge text-xs">Java</span> <span class="cert-badge text-xs">C</span> <span class="cert-badge text-xs">C++</span> <span class="cert-badge text-xs">C#</span> <span class="cert-badge text-xs">Kotlin</span> <span class="cert-badge text-xs">JavaScript</span> <span class="cert-badge text-xs">HTML/CSS</span> <span class="cert-badge text-xs">XML</span>
        </div>
-      </div><!-- Frameworks & Libraries -->
+      </div>
       <div class="skill-container">
        <h3 class="text-lg font-bold gradient-text mb-4">Frameworks &amp; Libraries</h3>
        <div class="flex flex-wrap gap-2"><span class="cert-badge text-xs">React</span> <span class="cert-badge text-xs">Unity</span> <span class="cert-badge text-xs">Bootstrap</span>
        </div>
-      </div><!-- Tools & Platforms -->
+      </div>
       <div class="skill-container">
        <h3 class="text-lg font-bold gradient-text mb-4">Tools &amp; Platforms</h3>
        <div class="flex flex-wrap gap-2"><span class="cert-badge text-xs">Git/GitHub</span> <span class="cert-badge text-xs">VS Code</span> <span class="cert-badge text-xs">Figma</span> <span class="cert-badge text-xs">PyCharm</span> <span class="cert-badge text-xs">Canva</span> <span class="cert-badge text-xs">Android SDK</span>
        </div>
-      </div><!-- Core Competencies -->
+      </div>
       <div class="skill-container">
        <h3 class="text-lg font-bold gradient-text mb-4">Core Competencies</h3>
        <div class="flex flex-wrap gap-2"><span class="cert-badge text-xs">OOP</span> <span class="cert-badge text-xs">Web Dev</span> <span class="cert-badge text-xs">Game Dev</span> <span class="cert-badge text-xs">Optimization</span> <span class="cert-badge text-xs">Testing</span> <span class="cert-badge text-xs">Agile</span> <span class="cert-badge text-xs">Leadership</span>
@@ -1189,7 +1448,7 @@
      <div class="grid md:grid-cols-2 gap-6">
       <div class="glass-card p-6">
        <div class="cert-card-content">
-        <div class="cert-image-placeholder" onclick="openCertModal('1st Place - CSS Research Exhibit 2025', 'Jan 2025', 'https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_CISCO_OPERATING%20SYSTEMS%20BASICS_DEC%202025_page-0001.jpg')"><img src="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_CISCO_OPERATING%20SYSTEMS%20BASICS_DEC%202025_page-0001.jpg" alt="1st Place Certificate" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#6366f1'; this.alt='Image unavailable';">
+        <div class="cert-image-placeholder" onclick="openCertModal('1st Place - CSS Research Exhibit 2025', 'Jan 2025', 'https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_Best_Thesis_Award_Certification_2025.jpg')"><img src="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_Best_Thesis_Award_Certification_2025.jpg" alt="1st Place Certificate" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#4f46e5'; this.alt='Image unavailable';">
         </div>
         <div>
          <div class="flex items-start gap-3"><span class="text-3xl">🏆</span>
@@ -1203,7 +1462,7 @@
       </div>
       <div class="glass-card p-6">
        <div class="cert-card-content">
-        <div class="cert-image-placeholder" onclick="openCertModal('Operating Systems Basics', 'Sep 2025 - Dec 2025', 'https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_CISCO_OPERATING%20SYSTEMS%20BASICS_DEC%202025_page-0001.jpg')"><img src="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_CISCO_OPERATING%20SYSTEMS%20BASICS_DEC%202025_page-0001.jpg" alt="Operating Systems Basics Certificate" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#6366f1'; this.alt='Image unavailable';">
+        <div class="cert-image-placeholder" onclick="openCertModal('Operating Systems Basics', 'Sep 2025 - Dec 2025', 'https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_CISCO_OPERATING%20SYSTEMS%20BASICS_DEC%202025_page-0001.jpg')"><img src="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_CISCO_OPERATING%20SYSTEMS%20BASICS_DEC%202025_page-0001.jpg" alt="Operating Systems Basics Certificate" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#4f46e5'; this.alt='Image unavailable';">
         </div>
         <div>
          <div class="flex items-start gap-3"><span class="text-3xl">🎓</span>
@@ -1217,10 +1476,10 @@
       </div>
       <div class="glass-card p-6">
        <div class="cert-card-content">
-        <div class="cert-image-placeholder" onclick="openCertModal('PCAP - Python Essentials', 'Sep 2024 - Dec 2024', 'https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_CISCO_PCAP%20-%20PROGRAMMING%20ESSENTIALS%20IN%20PYTHON_NOW%202023_page-0001.jpg')"><img src="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_CISCO_PCAP%20-%20PROGRAMMING%20ESSENTIALS%20IN%20PYTHON_NOW%202023_page-0001.jpg" alt="PCAP Certificate" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#6366f1'; this.alt='Image unavailable';">
+        <div class="cert-image-placeholder" onclick="openCertModal('PCAP - Python Essentials', 'Sep 2024 - Dec 2024', 'https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_CISCO_PCAP%20-%20PROGRAMMING%20ESSENTIALS%20IN%20PYTHON_NOW%202023_page-0001.jpg')"><img src="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_CISCO_PCAP%20-%20PROGRAMMING%20ESSENTIALS%20IN%20PYTHON_NOW%202023_page-0001.jpg" alt="PCAP Certificate" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#4f46e5'; this.alt='Image unavailable';">
         </div>
         <div>
-         <div class="flex items-start gap-3"><span class="text-3xl">🐍</span>
+         <div class="flex items-start gap-3"><span class="text-3xl">⚡</span>
           <div><span class="cert-badge text-xs mb-2">Sep 2024 - Dec 2024</span>
            <h3 class="font-bold mt-2 text-sm">PCAP - Python Essentials</h3>
            <p class="text-xs opacity-70 mt-1">Cisco Networking Academy</p>
@@ -1231,7 +1490,7 @@
       </div>
       <div class="glass-card p-6">
        <div class="cert-card-content">
-        <div class="cert-image-placeholder" onclick="openCertModal('Fundamentals of Basic C', 'Sep 2023 - Dec 2023', 'https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_CODECHUM_FUNDAMENTAL%20OF%20PROGRAMMING%20IN%20C_DEC%202022.png')"><img src="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_CODECHUM_FUNDAMENTAL%20OF%20PROGRAMMING%20IN%20C_DEC%202022.png" alt="Fundamentals of C Certificate" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#6366f1'; this.alt='Image unavailable';">
+        <div class="cert-image-placeholder" onclick="openCertModal('Fundamentals of Basic C', 'Sep 2023 - Dec 2023', 'https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_CODECHUM_FUNDAMENTAL%20OF%20PROGRAMMING%20IN%20C_DEC%202022.png')"><img src="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_CODECHUM_FUNDAMENTAL%20OF%20PROGRAMMING%20IN%20C_DEC%202022.png" alt="Fundamentals of C Certificate" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#4f46e5'; this.alt='Image unavailable';">
         </div>
         <div>
          <div class="flex items-start gap-3"><span class="text-3xl">⚡</span>
@@ -1267,9 +1526,9 @@
         </div>
        </div>
        <div class="membership-images">
-        <div class="membership-image-placeholder" onclick="openCertModal('JPCS Membership Certificate 1', 'Aug 2025 - Jun 2026', 'https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_JPCS%20CERTIFICATE%20OF%20MEMBERSHIP%202025-2026_page-0001.jpg')"><img src="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_JPCS%20CERTIFICATE%20OF%20MEMBERSHIP%202025-2026_page-0001.jpg" alt="JPCS Membership 1" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#6366f1'; this.alt='Image unavailable';">
+        <div class="membership-image-placeholder" onclick="openCertModal('JPCS Membership Certificate 1', 'Aug 2025 - Jun 2026', 'https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_JPCS%20CERTIFICATE%20OF%20MEMBERSHIP%202025-2026_page-0001.jpg')"><img src="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_JPCS%20CERTIFICATE%20OF%20MEMBERSHIP%202025-2026_page-0001.jpg" alt="JPCS Membership 1" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#4f46e5'; this.alt='Image unavailable';">
         </div>
-        <div class="membership-image-placeholder" onclick="openCertModal('JPCS Membership Certificate 2', 'Aug 2024 - Jun 2025', 'https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_JPCS%20CERTIFICATE%20OF%20MEMBERSHIP%202024-2025_page-0001.jpg')"><img src="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_JPCS%20CERTIFICATE%20OF%20MEMBERSHIP%202024-2025_page-0001.jpg" alt="JPCS Membership 2" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#6366f1'; this.alt='Image unavailable';">
+        <div class="membership-image-placeholder" onclick="openCertModal('JPCS Membership Certificate 2', 'Aug 2024 - Jun 2025', 'https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_JPCS%20CERTIFICATE%20OF%20MEMBERSHIP%202024-2025_page-0001.jpg')"><img src="https://raw.githubusercontent.com/orlanzzz/Jon-Orlanz-Naluz-Portfolio/main/public/28_JPCS%20CERTIFICATE%20OF%20MEMBERSHIP%202024-2025_page-0001.jpg" alt="JPCS Membership 2" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#4f46e5'; this.alt='Image unavailable';">
         </div>
        </div>
       </div>
@@ -1351,14 +1610,14 @@
     };
 
     let config = { ...defaultConfig };
-    let isLightMode = false;
+    let isDarkMode = false;
 
     // Theme toggle functionality
     function toggleTheme() {
-      isLightMode = !isLightMode;
-      document.body.classList.toggle('light-mode', isLightMode);
+      isDarkMode = !isDarkMode;
+      document.body.classList.toggle('dark-mode', isDarkMode);
       const knob = document.querySelector('.toggle-knob');
-      knob.textContent = isLightMode ? '☀️' : '🌙';
+      knob.textContent = isDarkMode ? '🌙' : '☀️';
     }
 
     // Mobile menu functionality
@@ -1368,6 +1627,16 @@
 
     function closeMobileMenu() {
       document.getElementById('mobileMenu').classList.remove('active');
+    }
+
+    // Resume modal functionality
+    function openResumeModal() {
+      document.getElementById('resumeModal').classList.add('active');
+    }
+
+    function closeResumeModal(event) {
+      if (event && event.target.id !== 'resumeModal') return;
+      document.getElementById('resumeModal').classList.remove('active');
     }
 
     // Certificate modal functionality
@@ -1385,9 +1654,10 @@
       document.getElementById('certModal').classList.remove('active');
     }
 
-    // Close modal when pressing Escape
+    // Close modals when pressing Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
+        closeResumeModal({ target: { id: 'resumeModal' } });
         closeCertModal({ target: { id: 'certModal' } });
       }
     });
@@ -1483,5 +1753,5 @@
 
     init();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ce989172472b9ef',t:'MTc3MTIwODEwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9cf344f65418b9fc',t:'MTc3MTMxMDE3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
